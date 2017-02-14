@@ -53,9 +53,13 @@ document.querySelector("#blow-up button").addEventListener('click',function(){
   console.log(daWidth)
 
   console.log(bigButton.style.width);
-
+  if(parseInt(bigButtonStyle.width) < 320){
   bigButton.style.width = (daWidth[0] * 2) + "px"
   bigButton.style.height = (daWidth[0] * 2) + "px"
+}else {
+  bigButton.style.width = "40px"
+  bigButton.style.height = "40px"
+}
 
 })
 
@@ -95,20 +99,32 @@ document.querySelector("#remove button").addEventListener('click',function(){
 
 document.querySelector("#reverse-squares button").addEventListener('click',function(){
   // TASK #6
+  // (1) seleect all elements that are have class of .square w/ document.querySelectorAll()
+  var everySquareEl = document.querySelectorAll('.square')
+  // OPTIMAL
+ // (2) iterate over elements backwards ... for ( var i = allSquares.length - 1 ; i >= 0 ; i-- )
+  // (3) select #reverse-squares .answer-box and .appendChild( squareDomElement  )
+  for (var i = everySquareEl.length - 1 ; i >= 0 ; i--){
+    let listOfReversedSquares = document.querySelector('#reverse-squares .answer-box')
+    //console.log(listOfReversedSquares)
+    listOfReversedSquares.appendChild(everySquareEl[i])
+   }
+   //console.log(everySquareEl)
 })
 
 document.querySelector("#pig-latin button").addEventListener('click',function(){
   // TASK #7
-  var pigLatinArr = document.querySelectorAll('#tasks li')
+  var listElements = document.querySelectorAll('#tasks li')
   var pigLatinContainer = document.querySelector('#tasks')
 
-      forEach(pigLatinArr, function(liEl, index, array){
-
-        // console.log(liEl.innerHTML)
-        for (var i = liEl.innerHTML.length -1; i >= 0; i--) {
-             reverseArr = liEl.innerHTML[i]
+      forEach(listElements, function(liEl, index, array){
+        var currentText = liEl.innerHTML
+        liEl.innerHTML = ''
+        console.log(liEl.innerHTML)
+        for (var i = currentText.length -1; i >= 0; i--) {
+             reverseArr = currentText[i]
              //console.log(reverseArr)
-             pigLatinContainer.innerHTML += reverseArr
+             liEl.innerHTML += reverseArr
              console.log(pigLatinContainer.innerHTML)
            }
 
